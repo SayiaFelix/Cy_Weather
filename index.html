@@ -16,17 +16,28 @@
     <div class="container">
         <h1>Welcome to CyWeather</h1>
         <br>
-        <form id="weather">
-            <label for="">Latitude</label> <br>
-            <input type="number" id="latitide" placeholder="Enter Latitude..." min="0" />
-            <br />
-            <br>
-            <label for="">Longitude</label>
-            <br>
-            <input type="number" id="longitude" placeholder="Enter Longitude..." min="0" />
-            <br /><br>
-            <input type="submit" value="Search" />
-        </form>
+        <div class="row">
+            <div class="col-6">
+                <form id="weather">
+                    <label for="">Latitude</label> <br>
+                    <input type="number" id="lat" placeholder="Enter Latitude..." min="0" />
+                    <br />
+                    <br>
+                    <label for="">Longitude</label>
+                    <br>
+                    <input type="number" id="lon" placeholder="Enter Longitude..." min="0" />
+                    <br /><br>
+                    <input type="submit" value="Search" />
+                </form>
+            </div>
+            <div class="col-6">
+                <p>You Have not Search for anything</p>
+
+
+            </div>
+
+        </div>
+
     </div>
 
 
