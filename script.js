@@ -7,7 +7,7 @@ function geoLocation() {
     function success(position) {
         const latitude = parseFloat(position.coords.latitude)
         const longitude = parseFloat(position.coords.longitude)
-        status.innerHTML = `Your location is at <br>latitude: ${latitude}, longitude: ${longitude}`
+        status.innerHTML = `Your location is: <br>latitude: ${latitude}, longitude: ${longitude}`
         getWeather(latitude, longitude)
     }
 
@@ -73,7 +73,7 @@ function weatherPost(weatherData, p) {
     const cloud = weatherData.hourly.cloudcover_mid
 
 
-    const str = ` Tempe:${tempe} <br>sec:${sec} <br> time:${time} <br> temp:${temp}°C <br> humidity:${humidity} <br>wind:${wind}m/s cloud:${cloud}%`
+    const str = `Tempe: ${tempe} <br> Sec: ${sec} <br> Time: <br> ${time} <br> Temp: ${temp}°C <br> Humidity: ${humidity}% <br> Wind: ${wind}km/h <br> Cloud: ${cloud}%`
     p.innerHTML = str
 
 
