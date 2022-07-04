@@ -1,13 +1,14 @@
 // locating latitude and longitude for your location
-document.getElementById('location').addEventListener('click', geoLookUp, false)
+document.getElementById('location').addEventListener('click', geoLocation, false)
 
-function geoLookUp() {
+function geoLocation() {
     const status = document.getElementById('stat')
 
     function success(position) {
-        const lat = position.coords.latitude
-        const lon = position.coords.longitude
-        status.innerHTML = `Your location is at <br>latitude: ${lat}, longitude: ${lon} `
+        const latitude = parseFloat(position.coords.latitude)
+        const longitude = parseFloat(position.coords.longitude)
+        status.innerHTML = `Your location is at <br>latitude: ${latitude}, longitude: ${longitude}`
+        getWeather(latitude, longitude)
     }
 
     function error(err) {
@@ -25,32 +26,34 @@ function geoLookUp() {
 
 // Retrieve the weather information
 
-const p = document.querySelector('#weather, p')
+function getWeather(latitude, longitude) {
 
-let weatherData = {}
+    const p = document.querySelector('#weather p')
 
-let xhr = new XMLHttpRequest()
+    let weatherData = {}
+    let weather = new XMLHttpRequest()
 
-xhr.open('GET', 'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m')
-xhr.responseType = 'text';
+    weather.open('GET', 'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m,relativehumidity_2m,windspeed_120m,cloudcover_mid')
+    weather.responseType = 'text';
 
-xhr.addEventListener('load', function() {
-    if (xhr.status === 200) {
-        p.textContent = "loading...";
-        weatherData = JSON.parse(xhr.responseText)
-        weatherPost()
+    weather.addEventListener('load', function() {
+        if (weather.status === 200) {
+            p.textContent = "loading...";
+            weatherData = JSON.parse(weather.responseText)
+            weatherPost(weatherData, p)
 
-    } else {
+        } else {
+            p.textContent = "error: " + weather.status
+        }
 
-        p.textContent = "error: " + xhr.status
-    }
+    }, false)
+    weather.send()
 
-}, false)
+}
 
-xhr.send()
 
 // Display weather information
-function weatherPost() {
+function weatherPost(weatherData, p) {
     // time,
     // temperature_2m,
     // humidity_2m,
@@ -65,12 +68,12 @@ function weatherPost() {
 
 
 
-    const humidity = weatherData.hourly.humidity_2m
-    const wind = weatherData.hourly.wind_2m
+    const humidity = weatherData.hourly.relativehumidity_2m
+    const wind = weatherData.hourly.windspeed_120m
     const cloud = weatherData.hourly.cloudcover_mid
 
 
-    const str = ` Tempe:${tempe} <br>sec:${sec} <br> time:${time} \n temp:${temp} humidity:${humidity} wind:${wind} cloud:${cloud}`
+    const str = ` Tempe:${tempe} <br>sec:${sec} <br> time:${time} <br> temp:${temp}°C <br> humidity:${humidity} <br>wind:${wind}m/s cloud:${cloud}%`
     p.innerHTML = str
 
 
