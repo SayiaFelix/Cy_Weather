@@ -48,3 +48,27 @@ function weatherPost() {
 
 
 }
+// locating latitude and longitude for your location
+document.getElementById('location').addEventListener('click', geoLookUp, false)
+
+function geoLookUp() {
+    const status = document.getElementById('stat')
+
+
+    function success(position) {
+        const lat = position.coords.latitude
+        const lon = position.coords.longitude
+        status.innerHTML = `Your location is at <br>latitude: ${lat}, longitude: ${lon} `
+    }
+
+    function error(err) {
+        status.innerHTML = `Did not retrieve location,Error:${err.code}. ${ err.message }`
+    }
+    if (!navigator.geolocation) {
+        status.innerHTML = `Geolocation is not available or supported allowed by your browser, Please connect to the Google Map API and try again`
+    } else {
+
+        status.innerHTML = `Processing...`
+        navigator.geolocation.getCurrentPosition(success, error)
+    }
+}
