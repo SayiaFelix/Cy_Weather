@@ -22,6 +22,7 @@ xhr.addEventListener('load', function() {
 
 xhr.send()
 
+// Display weather information
 function weatherPost() {
     // time,
     // temperature_2m,
@@ -29,10 +30,12 @@ function weatherPost() {
     // wind_2m,
     // cloud cover_2m
 
-    const time = weatherData.hourly.time
+
     const temp = weatherData.hourly.temperature_2m
     const sec = weatherData.generationtime_ms
     const tempe = weatherData.elevation
+    const time = weatherData.hourly.time
+
 
 
     const humidity = weatherData.hourly.humidity_2m
@@ -40,10 +43,8 @@ function weatherPost() {
     const cloud = weatherData.hourly.cloudcover_mid
 
 
-
-
-    const str = ` Tempe:${tempe} sec:${sec} time:${time} temp:${temp} humidity:${humidity} wind:${wind} cloud:${cloud}`
-    p.textContent = str
+    const str = ` Tempe:${tempe} <br>sec:${sec} <br> time:${time} \n temp:${temp} humidity:${humidity} wind:${wind} cloud:${cloud}`
+    p.innerHTML = str
 
 
 }
