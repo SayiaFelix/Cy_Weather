@@ -1,9 +1,10 @@
-body {
+body,
+#weather {
+    width: 100%;
     font-family: 'Poppins', sans-serif;
 }
 
 .container {
-    border: 1px solid #ccc;
     background-color: rgb(232, 240, 240);
     border-radius: 10px;
 }
