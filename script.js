@@ -61,19 +61,19 @@ function weatherPost(weatherData, p) {
     // cloud cover_2m
 
 
-    const temp = weatherData.hourly.temperature_2m
+
     const sec = weatherData.generationtime_ms
     const tempe = weatherData.elevation
-    const time = weatherData.hourly.time
+        // const time = weatherData.hourly.time
 
 
-
-    const humidity = weatherData.hourly.relativehumidity_2m
+    const temp = weatherData.hourly.temperature_2m
     const wind = weatherData.hourly.windspeed_120m
+    const humidity = weatherData.hourly.relativehumidity_2m
     const cloud = weatherData.hourly.cloudcover_mid
 
 
-    const str = `Tempe: ${tempe} <br> Sec: ${sec} <br> Time: <br> ${time} <br> Temp: ${temp}°C <br> Humidity: ${humidity}% <br> Wind: ${wind}km/h <br> Cloud: ${cloud}%`
+    const str = `Temperature in °C: ${temp}<br> Wind in km/h: ${wind} <br> Relative Humidity: ${humidity} <br> Cloud Cover: ${cloud} <br> Generationtime_ms: ${sec} <br> Elevation: ${tempe}`
     p.innerHTML = str
 
 
