@@ -23,9 +23,7 @@ function geoLocation() {
     }
 }
 
-
 // Retrieve the weather information
-
 function getWeather(latitude, longitude) {
 
     const p = document.querySelector('#weather p')
@@ -59,12 +57,9 @@ function weatherPost(weatherData, p) {
     // wind_2m,
     // cloud cover_2m
 
-
-
     const sec = weatherData.generationtime_ms
     const tempe = weatherData.elevation
         // const time = weatherData.hourly.time
-
     const temp = weatherData.hourly.temperature_2m
     const wind = weatherData.hourly.windspeed_120m
     const humidity = weatherData.hourly.relativehumidity_2m
