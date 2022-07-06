@@ -31,26 +31,25 @@ function getWeather(latitude, longitude) {
     const p = document.querySelector('#weather p')
 
     let weatherData = {}
-    let weather = new XMLHttpRequest()
+    let xhr = new XMLHttpRequest()
 
-    weather.open('GET', 'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m,relativehumidity_2m,windspeed_120m,cloudcover_mid')
-    weather.responseType = 'text';
+    xhr.open('GET', 'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m,relativehumidity_2m,windspeed_120m,cloudcover_mid')
+    xhr.responseType = 'text';
 
-    weather.addEventListener('load', function() {
-        if (weather.status === 200) {
+    xhr.addEventListener('load', function() {
+        if (xhr.status === 200) {
             p.textContent = "loading...";
-            weatherData = JSON.parse(weather.responseText)
+            weatherData = JSON.parse(xhr.responseText)
             weatherPost(weatherData, p)
 
         } else {
-            p.textContent = "error: " + weather.status
+            p.textContent = "error: " + xhr.status
         }
 
     }, false)
-    weather.send()
+    xhr.send()
 
 }
-
 
 // Display weather information
 function weatherPost(weatherData, p) {
@@ -66,15 +65,12 @@ function weatherPost(weatherData, p) {
     const tempe = weatherData.elevation
         // const time = weatherData.hourly.time
 
-
     const temp = weatherData.hourly.temperature_2m
     const wind = weatherData.hourly.windspeed_120m
     const humidity = weatherData.hourly.relativehumidity_2m
     const cloud = weatherData.hourly.cloudcover_mid
 
-
     const str = `Temperature in °C: ${temp}<br><br> Wind in km/h: ${wind} <br><br> Relative Humidity: ${humidity} <br><br> Cloud Cover: ${cloud} <br><br> Generationtime_ms: ${sec} <br><br> Elevation: ${tempe}`
     p.innerHTML = str
-
 
 }
